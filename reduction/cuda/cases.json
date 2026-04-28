@@ -1,8 +1,9 @@
 [
 	{
-		"name": "test_kernel",
-		"source": "test_kernel.cpp",
-		"compiler": "g++",
-		"flags": ""
+		"name": "kernel1",
+		"source": "kernel1.cu",
+		"compiler": "nvcc",
+		"flags": "",
+		"run_args": "-N 1000000"
 	}
 ]
