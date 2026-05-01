@@ -2,6 +2,11 @@
 	{
 		"name"       : "test_kernel",
 		"compile_cmd": "g++ test_kernel.cpp -o test_kernel",
-		"run_cmd"    : "./test_kernel -N 10"
+		"run_cmds"   :
+		[
+			"./test_kernel -N 10",
+			"./test_kernel -N 100",
+			"./test_kernel -N 1000"
+		]
 	}
 ]
