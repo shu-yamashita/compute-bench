@@ -1,9 +1,7 @@
 [
 	{
-		"name": "kernel1",
-		"source": "kernel1.cu",
-		"compiler": "nvcc",
-		"flags": "",
-		"run_args": "-N 1000000"
+		"name"       : "test_kernel",
+		"compile_cmd": "g++ test_kernel.cpp -o test_kernel",
+		"run_cmd"    : "./test_kernel -N 10"
 	}
 ]
