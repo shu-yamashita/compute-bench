@@ -3,14 +3,15 @@ import json
 from dataclasses import dataclass
 
 
-plt.rcParams["font.family"    ] = "Times New Roman"
-plt.rcParams["font.size"      ] = 15
-plt.rcParams["xtick.direction"] = "in"
-plt.rcParams["ytick.direction"] = "in"
-plt.rcParams["xtick.bottom"   ] = True
-plt.rcParams["xtick.top"      ] = True
-plt.rcParams["ytick.left"     ] = True
-plt.rcParams["ytick.right"    ] = True
+plt.rcParams["font.family"     ] = "Times New Roman"
+plt.rcParams["mathtext.fontset"] = "cm"
+plt.rcParams["font.size"       ] = 15
+plt.rcParams["xtick.direction" ] = "in"
+plt.rcParams["ytick.direction" ] = "in"
+plt.rcParams["xtick.bottom"    ] = True
+plt.rcParams["xtick.top"       ] = True
+plt.rcParams["ytick.left"      ] = True
+plt.rcParams["ytick.right"     ] = True
 
 
 @dataclass
@@ -34,15 +35,15 @@ def load_json():
 
 
 def plot_elapsed_time(cases: list[BenchmarkResult]) -> None:
-    fig, ax = plt.subplots()
-    fig.subplots_adjust(left=0.15, right=0.95, top=0.95, bottom=0.15)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    fig.subplots_adjust(left=0.15, right=0.65, top=0.95, bottom=0.15)
     for case in cases:
-        ax.plot(case.N_list, case.elapsed_times, label = case.run_cmd)
-    ax.set_xlabel("N")
-    ax.set_ylabel("Elapsed Time (us)")
+        ax.plot(case.N_list, case.elapsed_times, marker = "o", linewidth = 1, label = case.run_cmd)
+    ax.set_xlabel(r"$N$")
+    ax.set_ylabel(r"Elapsed time [$\mathrm{\mu s}$]")
     ax.set_xscale("log")
     ax.set_yscale("log")
-    ax.legend()
+    ax.legend(loc = "lower left", bbox_to_anchor = (1.0, 0.0))
     fig.savefig("elapsed_time.png")
 
 
