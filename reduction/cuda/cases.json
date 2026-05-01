@@ -1,18 +1,18 @@
 [
 	{
-		"compile_cmd": "g++ test_kernel.cpp -o test_kernel",
+		"compile_cmd": "g++ test_kernel.cpp -o ./bin/test_kernel",
 		"run_cmds":
 		[
-			"./test_kernel -x 1",
-			"./test_kernel -x 2"
+			"./bin/test_kernel -x 1",
+			"./bin/test_kernel -x 2"
 		],
 		"N_list": [ 10, 100, 1000 ]
 	},
 	{
-		"compile_cmd": "g++ test_kernel.cpp -O2 -o test_kernel_O2",
+		"compile_cmd": "g++ test_kernel.cpp -O2 -o ./bin/test_kernel_O2",
 		"run_cmds":
 		[
-			"./test_kernel_O2 -x 4"
+			"./bin/test_kernel_O2 -x 4"
 		],
 		"N_list": [ 10, 100, 1000 ]
 	}

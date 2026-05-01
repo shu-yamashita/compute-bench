@@ -6,7 +6,10 @@ from dataclasses import dataclass, asdict, field
 from pathlib import Path
 
 
-RESULT_DIR = Path("results")
+BIN_DIR = Path("./bin")
+BIN_DIR.mkdir(exist_ok = True)
+
+RESULT_DIR = Path("./results")
 RESULT_DIR.mkdir(exist_ok = True)
 
 
