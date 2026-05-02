@@ -13,6 +13,8 @@ BIN_DIR.mkdir(exist_ok = True)
 RESULT_DIR = Path("./results")
 RESULT_DIR.mkdir(exist_ok = True)
 
+CONFIG_DIR = Path("./config")
+
 
 @dataclass
 class BenchmarkCase:
@@ -28,7 +30,7 @@ class BenchmarkResult:
 
 
 def load_cases() -> list[BenchmarkCase]:
-    cfg_file = "cases.json"
+    cfg_file = CONFIG_DIR / "cases.json"
     with open(cfg_file, "r") as f:
         raw = json.load(f)
 

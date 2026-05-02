@@ -1,6 +1,10 @@
-import matplotlib.pyplot as plt
 import json
+import matplotlib.pyplot as plt
 from dataclasses import dataclass
+from pathlib import Path
+
+
+RESULTS_DIR = Path(__file__).parents[1] / "results"
 
 
 plt.rcParams["font.family"     ] = "Times New Roman"
@@ -22,7 +26,7 @@ class BenchmarkResult:
 
 
 def load_json():
-    result_file = "./results/elapsed_time.json"
+    result_file = RESULTS_DIR / "elapsed_time.json"
     cases = []
     with open(result_file, "r") as f:
         raw = json.load(f)
@@ -44,7 +48,7 @@ def plot_elapsed_time(cases: list[BenchmarkResult]) -> None:
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.legend(loc = "lower left", bbox_to_anchor = (1.0, 0.0))
-    fig.savefig("elapsed_time.png")
+    fig.savefig(Path(__file__).parent / "elapsed_time.png")
 
 
 def main():

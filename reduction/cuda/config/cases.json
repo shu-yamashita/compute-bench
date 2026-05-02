@@ -1,6 +1,6 @@
 [
 	{
-		"compile_cmd": "g++ test_kernel.cpp -o ./bin/test_kernel",
+		"compile_cmd": "g++ src/test_kernel.cpp -o ./bin/test_kernel",
 		"run_cmds":
 		[
 			"./bin/test_kernel -x 1",
@@ -9,7 +9,7 @@
 		"N_list": [ 10, 100, 1000 ]
 	},
 	{
-		"compile_cmd": "g++ test_kernel.cpp -O2 -o ./bin/test_kernel_O2",
+		"compile_cmd": "g++ src/test_kernel.cpp -O2 -o ./bin/test_kernel_O2",
 		"run_cmds":
 		[
 			"./bin/test_kernel_O2 -x 4"
