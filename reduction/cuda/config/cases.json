@@ -1,6 +1,6 @@
 [
 	{
-		"compile_cmd": "nvcc src/main.cu src/kernel1.cu -o ./bin/kernel1",
+		"compile_cmd": "make kernel1",
 		"run_cmds":
 		[
 			"./bin/kernel1 --seg-size 32",
