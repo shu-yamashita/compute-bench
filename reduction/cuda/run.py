@@ -1,3 +1,4 @@
+import ast
 import json
 import subprocess
 import sys
@@ -63,7 +64,8 @@ def run_case(
                 print(e.stdout, file = sys.stderr)
                 print(e.stderr, file = sys.stderr)
                 sys.exit(1)
-            elapsed = float(result.stdout)
+            stdout_dict = ast.literal_eval(result.stdout)
+            elapsed = stdout_dict["time"]
             result_this_case.elapsed_times.append(elapsed)
         results_all_cases.append(result_this_case)
 

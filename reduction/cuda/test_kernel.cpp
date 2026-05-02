@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
 
 	assert( N > 0 );
 
-	std::cout << x * N * N << std::endl;
+	const int time = x * N * N;
+	std::cout << "{\"time\": " << time << "}" << std::endl;
 	return 0;
 }
