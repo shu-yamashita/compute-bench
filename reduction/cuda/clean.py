@@ -2,11 +2,6 @@
 
 import subprocess
 
-remove_list = [
-        "bin",
-        "results",
-        "plot/*.png",
-        ]
-
-for elem in remove_list:
-    subprocess.run(f"rm -r {elem}".split())
+subprocess.run("rm -r bin", shell=True)
+subprocess.run("rm -r results", shell=True)
+subprocess.run("rm -r plot/*.png", shell=True)
