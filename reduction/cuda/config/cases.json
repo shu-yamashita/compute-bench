@@ -1,19 +1,10 @@
 [
 	{
-		"compile_cmd": "g++ src/test_kernel.cpp -o ./bin/test_kernel",
+		"compile_cmd": "nvcc src/main.cu src/kernel1.cu -o ./bin/kernel1",
 		"run_cmds":
 		[
-			"./bin/test_kernel -x 1",
-			"./bin/test_kernel -x 2"
+			"./bin/kernel1"
 		],
-		"N_list": [ 10, 100, 1000 ]
-	},
-	{
-		"compile_cmd": "g++ src/test_kernel.cpp -O2 -o ./bin/test_kernel_O2",
-		"run_cmds":
-		[
-			"./bin/test_kernel_O2 -x 4"
-		],
-		"N_list": [ 10, 100, 1000 ]
+		"N_list": [ 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 ]
 	}
 ]
