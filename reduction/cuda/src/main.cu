@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 	{
 		using namespace std::chrono;
 		const auto start = high_resolution_clock::now();
-		const double max_val = gpu_max(d_array, N, d_tmp_array1, d_tmp_array2);
+		const double max_val = gpu_max( d_array, N, d_tmp_array1, d_tmp_array2, args );
 		const auto end   = high_resolution_clock::now();
 
 		const auto elapsed = duration_cast<microseconds>(end - start);

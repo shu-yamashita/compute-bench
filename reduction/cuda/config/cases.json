@@ -3,7 +3,11 @@
 		"compile_cmd": "nvcc src/main.cu src/kernel1.cu -o ./bin/kernel1",
 		"run_cmds":
 		[
-			"./bin/kernel1"
+			"./bin/kernel1 --seg-size 32",
+			"./bin/kernel1 --seg-size 64",
+			"./bin/kernel1 --seg-size 128",
+			"./bin/kernel1 --seg-size 256",
+			"./bin/kernel1 --seg-size 512"
 		],
 		"N_list": [ 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 ]
 	}

@@ -15,6 +15,7 @@ struct Args {
 
 
 // --abc-de -> abc-de
+inline
 void remove_front_bars( std::string& s )
 {
 	std::reverse( s.begin(), s.end() );
@@ -23,6 +24,7 @@ void remove_front_bars( std::string& s )
 }
 
 
+inline
 Args parse_args(int argc, char* argv[])
 {
 	Args result;
