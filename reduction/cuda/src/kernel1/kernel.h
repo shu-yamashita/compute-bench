@@ -1,12 +1,17 @@
+#pragma once
+
 #include <cassert>
 #include <utility>
-#include "cuda_macro.h"
+#include "../arg_parse.h"
+#include "../cuda_macro.h"
 #include "kernel.h"
 
 
-template <typename T>
+template <typename T, typename BinaryOperation>
 __global__
-void max_reduce_kernel(const T* input, T* output, const int N)
+void reduce_kernel(
+		const T* input, T* output, const int N,
+		BinaryOperation op, T identity )
 {
 	extern __shared__ unsigned char smem[];
 	T* sdata = reinterpret_cast<T*>(smem);
@@ -14,15 +19,15 @@ void max_reduce_kernel(const T* input, T* output, const int N)
 	const int tid = threadIdx.x;
 	const int i   = blockIdx.x * blockDim.x * 2 + threadIdx.x;
 
-	T mymax = ( i < N ) ? input[i] : -1e100;
-	if ( i + blockDim.x < N ) mymax = fmax( mymax, input[i + blockDim.x] );
+	T tmp = ( i < N ) ? input[i] : identity;
+	if ( i + blockDim.x < N ) tmp = op( tmp, input[i + blockDim.x] );
 
-	sdata[tid] = mymax;
+	sdata[tid] = tmp;
 	__syncthreads();
 
 	for ( int s = blockDim.x/2; s > 0; s>>=1 )
 	{
-		if( tid < s ) sdata[tid] = fmax( sdata[tid], sdata[tid + s] );
+		if( tid < s ) sdata[tid] = op( sdata[tid], sdata[tid + s] );
 		__syncthreads();
 	}
 
@@ -30,11 +35,12 @@ void max_reduce_kernel(const T* input, T* output, const int N)
 }
 
 
-template <typename T>
-T gpu_max(
+template <typename T, typename BinaryOperation>
+T device_reduce(
 		const T *d_array, const int N,
 		T *d_tmp_array1, T *d_tmp_array2,
-		const Args& args )
+		BinaryOperation op, T identity,
+		const Args& args)
 {
 	const auto iter = args.options.find("seg-size");
 	assert( iter != args.options.end() );
@@ -46,17 +52,14 @@ T gpu_max(
 	while( size > 1 ){ 
 		dim3 block( seg_size / 2, 1, 1 );
 		dim3 grid(( size + seg_size - 1 ) / seg_size, 1, 1);
-		max_reduce_kernel<<<grid, block, seg_size / 2 * sizeof(T)>>>( d_tmp_array1, d_tmp_array2, size );
+		reduce_kernel<<<grid, block, seg_size / 2 * sizeof(T)>>>( d_tmp_array1, d_tmp_array2, size, op, identity );
 		CUDA_CHECK( cudaDeviceSynchronize() );
 		size = grid.x;
 		std::swap(d_tmp_array1, d_tmp_array2);
 	}
 
-	T max_vel;
-	CUDA_CHECK( cudaMemcpy( &max_vel, &(d_tmp_array1[0]), sizeof(T), cudaMemcpyDeviceToHost ) );
-	return max_vel;
+	T result;
+	CUDA_CHECK( cudaMemcpy( &result, &(d_tmp_array1[0]), sizeof(T), cudaMemcpyDeviceToHost ) );
+	return result;
 }
 
-
-template  float gpu_max<float> ( const  float *d_array, const int N,  float *d_tmp_array1,  float *d_tmp_array2, const Args& args );
-template double gpu_max<double>( const double *d_array, const int N, double *d_tmp_array1, double *d_tmp_array2, const Args& args );
