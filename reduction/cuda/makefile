@@ -1,5 +1,2 @@
-kernel1: src/main.cu src/arg_parse.cu src/kernel1.cu
-	nvcc $^ -o ./bin/kernel1
-
-kernel2: src/main.cu src/arg_parse.cu src/kernel2.cu
-	nvcc $^ -o ./bin/kernel2
+kernel1_%: src/main.cu src/arg_parse.cu src/kernel1.cu
+	nvcc $^ -DREDUCTION_TYPE=$* -o ./bin/kernel1_$*

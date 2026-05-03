@@ -2,10 +2,11 @@
 
 #include "arg_parse.h"
 
-double gpu_max(
-		const double *d_array,
+template <typename T>
+T gpu_max(
+		const T *d_array,
 		const int N,
-		double *d_tmp_array1,
-		double *d_tmp_array2,
+		T *d_tmp_array1,
+		T *d_tmp_array2,
 		const Args& args);
 
