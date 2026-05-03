@@ -3,11 +3,21 @@
 		"compile_cmd": "make kernel1",
 		"run_cmds":
 		[
-			"./bin/kernel1 --seg-size 32",
-			"./bin/kernel1 --seg-size 64",
+			"./bin/kernel1 --seg-size  32",
+			"./bin/kernel1 --seg-size  64",
 			"./bin/kernel1 --seg-size 128",
 			"./bin/kernel1 --seg-size 256",
 			"./bin/kernel1 --seg-size 512"
+		],
+		"N_list": [ 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 ]
+	},
+	{
+		"compile_cmd": "make kernel2",
+		"run_cmds":
+		[
+			"./bin/kernel2 --seg-size 128",
+			"./bin/kernel2 --seg-size 256",
+			"./bin/kernel2 --seg-size 512"
 		],
 		"N_list": [ 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 ]
 	}
