@@ -39,8 +39,8 @@ def load_json():
 
 
 def plot_elapsed_time(cases: list[BenchmarkResult]) -> None:
-    fig, ax = plt.subplots(figsize=(10, 6))
-    fig.subplots_adjust(left=0.15, right=0.65, top=0.95, bottom=0.15)
+    fig, ax = plt.subplots(figsize=(12, 6))
+    fig.subplots_adjust(left=0.1, right=0.5, top=0.95, bottom=0.15)
     for case in cases:
         ax.plot(case.N_list, case.elapsed_times, marker = "o", linewidth = 1, label = case.run_cmd)
     ax.set_xlabel(r"$N$")
