@@ -1,13 +1,21 @@
 [
 	{
-		"compile_cmd": "make kernel1",
+		"compile_cmd": "make kernel1_double",
 		"run_cmds":
 		[
-			"./bin/kernel1 --seg-size 32",
-			"./bin/kernel1 --seg-size 64",
-			"./bin/kernel1 --seg-size 128",
-			"./bin/kernel1 --seg-size 256",
-			"./bin/kernel1 --seg-size 512"
+			"./bin/kernel1_double --op=max --seg-size 128",
+			"./bin/kernel1_double --op=max --seg-size 256",
+			"./bin/kernel1_double --op=max --seg-size 512"
+		],
+		"N_list": [ 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 ]
+	},
+	{
+		"compile_cmd": "make kernel2_double",
+		"run_cmds":
+		[
+			"./bin/kernel2_double --op=max --seg-size 128",
+			"./bin/kernel2_double --op=max --seg-size 256",
+			"./bin/kernel2_double --op=max --seg-size 512"
 		],
 		"N_list": [ 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000 ]
 	}
